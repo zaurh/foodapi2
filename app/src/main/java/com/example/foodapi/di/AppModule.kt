@@ -1,7 +1,7 @@
 package com.example.foodapi.di
 
 import com.example.foodapi.common.Constants.BASE_URL
-import com.example.foodapi.data.remote.FoodApi
+import com.example.foodapi.data.remote.DummyApi
 import com.example.foodapi.data.repository.RepositoryImpl
 import com.example.foodapi.domain.repository.Repository
 import dagger.Module
@@ -26,12 +26,12 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRetrofitApi(retrofit: Retrofit): FoodApi{
-        return retrofit.create(FoodApi::class.java)
+    fun provideRetrofitApi(retrofit: Retrofit): DummyApi{
+        return retrofit.create(DummyApi::class.java)
     }
 
     @Singleton
     @Provides
-    fun provideRepository(api: FoodApi): Repository = RepositoryImpl(api)
+    fun provideRepository(api: DummyApi): Repository = RepositoryImpl(api)
 
 }

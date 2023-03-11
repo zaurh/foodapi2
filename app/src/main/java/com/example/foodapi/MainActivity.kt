@@ -6,11 +6,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.foodapi.presentation.Favorites.FavView
 import com.example.foodapi.presentation.Main.MainView
+import com.example.foodapi.presentation.Product.ProductView
 import com.example.foodapi.ui.theme.FoodapiTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,9 +28,25 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MainView()
+                    Navig()
                 }
             }
         }
+    }
+}
+@Composable
+fun Navig(){
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "main"){
+        composable("main"){
+            MainView(navController = navController)
+        }
+        composable("product/{id}"){
+            ProductView(navController = navController)
+        }
+        composable("favorites"){
+            FavView(navController = navController)
+        }
+
     }
 }
